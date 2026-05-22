@@ -28,46 +28,62 @@ export async function handleSearch(req: IncomingMessage, res: ServerResponse) {
   try {
     // Try SerpApi first
     if (serpApiKey) {
-      const serpApiUrl = `https://serpapi.com/search.json?q=${encodeURIComponent(query)}&api_key=${serpApiKey}&engine=google&google_domain=google.co.in&gl=in&hl=en`;
-      const response = await fetch(serpApiUrl);
-      const data = await response.json() as any;
+      try {
+        const serpApiUrl = `https://serpapi.com/search.json?q=${encodeURIComponent(query)}&api_key=${serpApiKey}&engine=google&google_domain=google.co.in&gl=in&hl=en`;
+        const response = await fetch(serpApiUrl);
+        const data = await response.json() as any;
 
-      if (data && data.organic_results) {
-        res.setHeader("Content-Type", "application/json");
-        res.end(JSON.stringify({
-          results: (data.organic_results as any[]).map((r: any) => ({
-            title: r.title,
-            link: r.link,
-            snippet: r.snippet
-          }))
-        }));
-        return;
+        if (data && data.organic_results) {
+          res.setHeader("Content-Type", "application/json");
+          res.end(JSON.stringify({
+            results: (data.organic_results as any[]).map((r: any) => ({
+              title: r.title,
+              link: r.link,
+              snippet: r.snippet
+            }))
+          }));
+          return;
+        } else if (data && data.error) {
+          console.warn("SerpApi warning:", data.error);
+        }
+      } catch (e) {
+        console.error("SerpApi fetch failed:", e);
       }
     }
 
     // Try Zenserp as backup
     if (zenserpKey) {
-      const zenserpUrl = `https://app.zenserp.com/api/v2/search?q=${encodeURIComponent(query)}&apikey=${zenserpKey}&location=India&search_engine=google.co.in`;
-      const response = await fetch(zenserpUrl);
-      const data = await response.json() as any;
+      try {
+        const zenserpUrl = `https://app.zenserp.com/api/v2/search?q=${encodeURIComponent(query)}&apikey=${zenserpKey}&location=India&search_engine=google.co.in`;
+        const response = await fetch(zenserpUrl);
+        const data = await response.json() as any;
 
-      if (data && data.organic) {
-        res.setHeader("Content-Type", "application/json");
-        res.end(JSON.stringify({
-          results: (data.organic as any[]).map((r: any) => ({
-            title: r.title,
-            link: r.url,
-            snippet: r.description
-          }))
-        }));
-        return;
+        if (data && data.organic) {
+          res.setHeader("Content-Type", "application/json");
+          res.end(JSON.stringify({
+            results: (data.organic as any[]).map((r: any) => ({
+              title: r.title,
+              link: r.url,
+              snippet: r.description
+            }))
+          }));
+          return;
+        } else if (data && data.error) {
+          console.warn("Zenserp warning:", data.error);
+        }
+      } catch (e) {
+        console.error("Zenserp fetch failed:", e);
       }
     }
 
-    throw new Error("No search results found or API keys missing");
+    throw new Error("No search results found from any provider or API limit reached");
   } catch (error) {
-    console.error("Search error:", error);
+    console.error("Search error details:", error);
     res.statusCode = 500;
-    res.end(JSON.stringify({ error: "Failed to perform search" }));
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify({ 
+      error: "Search failed", 
+      message: error instanceof Error ? error.message : "An unexpected error occurred during search"
+    }));
   }
 }
