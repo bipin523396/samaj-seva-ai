@@ -1,4 +1,26 @@
 {
+  "rewrites": [
+    {
+      "source": "/api/auth/login",
+      "destination": "/api/auth/login.ts"
+    },
+    {
+      "source": "/api/auth/logout",
+      "destination": "/api/auth/logout.ts"
+    },
+    {
+      "source": "/api/auth/register",
+      "destination": "/api/auth/register.ts"
+    },
+    {
+      "source": "/api/auth/session",
+      "destination": "/api/auth/session.ts"
+    },
+    {
+      "source": "/api/search",
+      "destination": "/api/search.ts"
+    }
+  ],
   "routes": [
     {
       "handle": "filesystem"
