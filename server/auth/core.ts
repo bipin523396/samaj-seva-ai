@@ -49,7 +49,8 @@ function getMongoUri() {
   const mongoUri = process.env.MONGODB_URI;
 
   if (!mongoUri) {
-    throw new Error("MONGODB_URI is not configured.");
+    console.error("CRITICAL: MONGODB_URI is not configured in environment variables.");
+    return null;
   }
 
   return mongoUri;
@@ -60,20 +61,28 @@ function getMongoDbName() {
 }
 
 function getJwtSecret() {
-  if (process.env.JWT_SECRET) {
-    return process.env.JWT_SECRET;
+  const secret = process.env.JWT_SECRET;
+  if (secret) {
+    return secret;
   }
 
   if (process.env.NODE_ENV !== "production") {
-    return "samaj-seva-ai-dev-secret";
+    return "samaj-seva-ai-local-dev-secret";
   }
 
-  throw new Error("JWT_SECRET is not configured.");
+  console.error("CRITICAL: JWT_SECRET is not configured in environment variables.");
+  throw new Error("Security configuration missing. Please add JWT_SECRET to Vercel environment variables.");
 }
 
 async function getMongoClient() {
+  const uri = getMongoUri();
+  if (!uri) throw new Error("Database configuration missing. Please add MONGODB_URI to Vercel environment variables.");
+
   if (!globalThis.__samajSevaMongoClientPromise) {
-    globalThis.__samajSevaMongoClientPromise = new MongoClient(getMongoUri()).connect();
+    globalThis.__samajSevaMongoClientPromise = new MongoClient(uri, {
+      connectTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 5000,
+    }).connect();
   }
 
   return globalThis.__samajSevaMongoClientPromise;

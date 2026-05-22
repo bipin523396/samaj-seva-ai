@@ -19,6 +19,12 @@ export async function handleSearch(req: IncomingMessage, res: ServerResponse) {
   const serpApiKey = process.env.SERPAPI_KEY;
   const zenserpKey = process.env.ZENSERP_KEY;
 
+  if (!serpApiKey && !zenserpKey) {
+    res.statusCode = 500;
+    res.end(JSON.stringify({ error: "Search configuration missing. Please add SERPAPI_KEY or ZENSERP_KEY to Vercel environment variables." }));
+    return;
+  }
+
   try {
     // Try SerpApi first
     if (serpApiKey) {
