@@ -90,10 +90,8 @@ async function getMongoClient() {
 
 async function getUsersCollection() {
   const client = await getMongoClient();
-  const collection = client.db(getMongoDbName()).collection<UserDocument>(USERS_COLLECTION);
-
-  await collection.createIndex({ email: 1 }, { unique: true });
-
+  const db = client.db(getMongoDbName());
+  const collection = db.collection<UserDocument>(USERS_COLLECTION);
   return collection;
 }
 
