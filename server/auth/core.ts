@@ -1,8 +1,10 @@
 import type { IncomingHttpHeaders, IncomingMessage, ServerResponse } from "node:http";
 
-import { compare, hash } from "bcryptjs";
+import bcrypt from "bcryptjs";
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import { MongoClient, ObjectId } from "mongodb";
+
+const { compare, hash } = bcrypt;
 
 export type AuthUser = {
   id: string;

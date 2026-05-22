@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
-import { handleLogin } from "../../server/auth/core.ts";
+import { handleLogin } from "../../server/auth/core.js";
 
 export default async function handler(request: VercelRequest, response: VercelResponse) {
   try {
