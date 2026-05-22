@@ -1,6 +1,6 @@
 import type { Plugin } from "vite";
 
-import { handleLogin, handleLogout, handleRegister, handleSession } from "./core";
+import { handleLogin, handleLogout, handleRegister, handleSession } from "./core.ts";
 
 const routeHandlers = {
   "/login": handleLogin,

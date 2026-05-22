@@ -3,8 +3,8 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-import { authDevPlugin } from "./server/auth/vite-plugin";
-import { searchDevPlugin } from "./server/search/vite-plugin";
+import { authDevPlugin } from "./server/auth/vite-plugin.ts";
+import { searchDevPlugin } from "./server/search/vite-plugin.ts";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {

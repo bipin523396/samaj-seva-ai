@@ -1,5 +1,5 @@
 import type { Plugin } from "vite";
-import { handleSearch } from "./core";
+import { handleSearch } from "./core.ts";
 
 export function searchDevPlugin(): Plugin {
   return {
