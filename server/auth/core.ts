@@ -230,6 +230,7 @@ async function withErrorHandling(handler: () => Promise<void>, response: Respons
   try {
     await handler();
   } catch (error) {
+    console.error("Auth error:", error);
     let message = "Something went wrong.";
     let statusCode = 500;
 
