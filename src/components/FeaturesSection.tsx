@@ -38,7 +38,7 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <section className="py-16 md:py-20 bg-secondary">
+    <section id="impact" className="py-16 md:py-20 bg-secondary">
       <div className="container">
         <div className="text-center mb-12">
           <span className="text-xs font-semibold text-accent uppercase tracking-wider">Why This Platform</span>

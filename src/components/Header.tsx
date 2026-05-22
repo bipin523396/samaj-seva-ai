@@ -16,11 +16,16 @@ const Header = () => {
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (href.startsWith("#")) {
+      e.preventDefault();
       if (window.location.pathname !== "/") {
-        e.preventDefault();
         navigate("/" + href);
+      } else {
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+          window.history.pushState(null, "", href);
+        }
       }
-      // If we are already on "/", the default anchor behavior will work
     }
   };
 
