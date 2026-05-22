@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { handleSearch } from "../server/search/core";
+import { handleSearch } from "../server/search/core.js";
 
 export default async function handler(request: VercelRequest, response: VercelResponse) {
   try {
