@@ -1,0 +1,59 @@
+{
+    "header": {
+        "about": "About",
+        "services": "Services",
+        "impact": "Impact",
+        "contact": "Contact",
+        "getStarted": "Get Started"
+    },
+    "hero": {
+        "title": "Empowering Communities Through Technology",
+        "subtitle": "Connecting volunteers, NGOs, and resources to create lasting social impact.",
+        "joinCommunity": "Join the Community",
+        "learnMore": "Learn More"
+    },
+    "services": {
+        "title": "Our Services",
+        "subtitle": "Comprehensive solutions for social welfare",
+        "education": "Education Support",
+        "healthcare": "Healthcare Access",
+        "environment": "Environmental Protection",
+        "women": "Women Empowerment",
+        "rural": "Rural Development",
+        "disaster": "Disaster Relief",
+        "agriculture": "Agriculture & Farming",
+        "finance": "Financial Inclusion",
+        "housing": "Housing & Infrastructure",
+        "skills": "Skill Development",
+        "social_security": "Social Security"
+    },
+    "features": {
+        "title": "Why Choose Us",
+        "subtitle": "Building a better future together",
+        "community": "Community Driven",
+        "communityDesc": "Built by the community, for the community.",
+        "transparency": "Full Transparency",
+        "transparencyDesc": "Track every donation and hour volunteered.",
+        "impact": "Measurable Impact",
+        "impactDesc": "See the real-world difference you make."
+    },
+    "howItWorks": {
+        "title": "How It Works",
+        "subtitle": "Simple steps to make a big difference",
+        "step1": "Register",
+        "step1Desc": "Create your account as a volunteer or NGO.",
+        "step2": "Connect",
+        "step2Desc": "Find causes that matter to you.",
+        "step3": "Contribute",
+        "step3Desc": "Donate time or resources effectively.",
+        "step4": "Impact",
+        "step4Desc": "Track the change you've created."
+    },
+    "footer": {
+        "about": "Samaj Seva AI is dedicated to transforming social service through technology.",
+        "quickLinks": "Quick Links",
+        "contact": "Contact Us",
+        "followUs": "Follow Us",
+        "rights": "© 2024 Samaj Seva AI. All rights reserved."
+    }
+}
